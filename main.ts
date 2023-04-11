@@ -21,15 +21,9 @@ export default class MyPlugin extends Plugin {
 		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
 			// Called when the user clicks the icon.
 			new Notice('Hello World!');
-			const sourceElement = document.querySelector(".view-header-title");
-			const destinationElement = document.querySelector(".workspace-tab-header-container");
-			if (sourceElement && destinationElement){
-				console.log(sourceElement.textContent);
-				// destinationElement.innerHTML = sourceElement.innerHTML;
-				destinationElement.textContent = sourceElement.textContent;
-			}
-			new Notice(sourceElement.textContent);
 		});
+
+
 		// Perform additional things with the ribbon
 		ribbonIconEl.addClass('my-plugin-ribbon-class');
 
@@ -85,6 +79,22 @@ export default class MyPlugin extends Plugin {
 
 		// When registering intervals, this function will automatically clear the interval when the plugin is disabled.
 		this.registerInterval(window.setInterval(() => console.log('setInterval'), 5 * 60 * 1000));
+
+		//20230411-175740 ok
+		this.registerEvent(
+			this.app.workspace.on("file-open", (file) => {
+				console.log("file-open", file.path);
+
+				const sourceElement = document.querySelector(".view-header-title");
+				const destinationElement = document.querySelector(".workspace-tabs.mod-stacked.mod-top.mod-active >div> .workspace-tab-header-spacer");
+				if (sourceElement && destinationElement){
+					console.log(sourceElement.textContent);
+					// destinationElement.innerHTML = sourceElement.innerHTML;
+					destinationElement.textContent = sourceElement.textContent;
+				}
+				new Notice(sourceElement.textContent);
+			})
+		);
 	}
 
 	onunload() {

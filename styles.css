@@ -6,9 +6,9 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
-.workspace-tab-header-container{
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.workspace-tabs.mod-stacked.mod-top.mod-active >div> .workspace-tab-header-spacer{
+    text-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
