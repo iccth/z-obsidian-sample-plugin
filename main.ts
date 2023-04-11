@@ -14,12 +14,21 @@ export default class MyPlugin extends Plugin {
 	settings: MyPluginSettings;
 
 	async onload() {
+
 		await this.loadSettings();
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
 			// Called when the user clicks the icon.
-			new Notice('This is a notice!');
+			new Notice('Hello World!');
+			const sourceElement = document.querySelector(".view-header-title");
+			const destinationElement = document.querySelector(".workspace-tab-header-container");
+			if (sourceElement && destinationElement){
+				console.log(sourceElement.textContent);
+				// destinationElement.innerHTML = sourceElement.innerHTML;
+				destinationElement.textContent = sourceElement.textContent;
+			}
+			new Notice(sourceElement.textContent);
 		});
 		// Perform additional things with the ribbon
 		ribbonIconEl.addClass('my-plugin-ribbon-class');
@@ -79,7 +88,7 @@ export default class MyPlugin extends Plugin {
 	}
 
 	onunload() {
-
+		console.log('unloading plugin')
 	}
 
 	async loadSettings() {
